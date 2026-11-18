@@ -1,0 +1,2 @@
+# Este projeto usa apenas a biblioteca padrao do Python.
+# O tkinter ja vem instalado com o Python, então nao ha nada para instalar.
