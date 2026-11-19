@@ -9,7 +9,7 @@ class FilaFIFO:
     #Fila First In, First Out implantada com lista encadeada.
 
     def __init__(self):
-        self.inicio = None #Primeiro da fila (proximo a sair)
+        self._inicio = None #Primeiro da fila (proximo a sair)
         self._fim = None
         self._tamanho = 0 
 
@@ -55,40 +55,41 @@ class FilaFIFO:
             atual = atual.proximo
         return itens
 
-    class FilaPrioridade:
-        #Conjunto de filas FIFO, uma por categoria, em ordem de prioridade.
-        #A categoria que aparece primeiro na lista tem a maior prioridade.
-        def __init__(self, categorias_em_ordem):
-            self.ordem = list(categorias_em_ordem)
-            self._filas = {categoria: FilaFIFO() for categoria in self._ordem}
+class FilaPrioridade:
+    # Conjunto de filas FIFO, uma por categoria, em ordem de prioridade.
+    # A categoria que aparece primeiro na lista tem a maior prioridade.
 
-        def fila_da(self, categoria):
-            if categoria not in self._filas:
-                raise EntradaInvalidaError (f'Categoria desconhecida: {categoria}')
-            return self._filas[categoria]
+    def __init__(self, categorias_em_ordem):
+        self._ordem = list(categorias_em_ordem)
+        self._filas = {categoria: FilaFIFO() for categoria in self._ordem}
 
-        def enfileirar(self, categoria, valor):
-            self._fila_da(categoria).enfileirar(valor)
+    def _fila_da(self, categoria):
+        if categoria not in self._filas:
+            raise EntradaInvalidaError(f'Categoria desconhecida: {categoria}')
+        return self._filas[categoria]
 
-        def desenfileirar(self):
-            #Retira da fila de maior prioridade que não esteja vazia.
-            for categoria in self._ordem:
-                fila = self._filas[categoria]
-                if not fila.esta_vazia():
-                    return fila.desenfileirar()
-                raise FilaVaziaError('Não há ninguém aguardando.')
+    def enfileirar(self, categoria, valor):
+        self._fila_da(categoria).enfileirar(valor)
 
-        def esta_vazia(self):
-            return self.tamanho() == 0
+    def desenfileirar(self):
+        # Retira da fila de maior prioridade que não esteja vazia.
+        for categoria in self._ordem:
+            fila = self._filas[categoria]
+            if not fila.esta_vazia():
+                return fila.desenfileirar()
+        raise FilaVaziaError('Não há ninguém aguardando.')
 
-        def tamanho(self, categoria=None):
-            if categoria is None:
-                return sum(len(fila) for fila in self._filas.values())
-            return len(self._fila_da(categoria))
+    def esta_vazia(self):
+        return self.tamanho() == 0
 
-        def listar(self):
-            #Ordem real de chamada: primeiro toda a categoria prioritária, depois as demais.
-            itens = []
-            for categoria in self._ordem:
-                itens.extend(self._filas[categoria].listar())
-            return itens
+    def tamanho(self, categoria=None):
+        if categoria is None:
+            return sum(len(fila) for fila in self._filas.values())
+        return len(self._fila_da(categoria))
+
+    def listar(self):
+        # Ordem real de chamada: primeiro toda a categoria prioritária, depois as demais.
+        itens = []
+        for categoria in self._ordem:
+            itens.extend(self._filas[categoria].listar())
+        return itens
