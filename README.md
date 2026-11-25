@@ -2,7 +2,7 @@
 Projeto da parte prática da prova regimental A1 — Estrutura de Dados II
 Centro Universitário UDF — Ciência da Computação — 4° Semestre
 ## Integrante
-- Kevyn Cardoso Diniz — matrícula:04395274-7
+- Kevyn Cardoso Diniz — Matrícula: 04395274-7
 ## Objetivo
 Informatizar o gerenciamento de senhas de atendimento de uma clínica médica
 com três especialidades (Clínica Geral, Cardiologia e Ortopedia), organizando
