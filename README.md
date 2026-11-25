@@ -25,17 +25,12 @@ inválidas e operações incompatíveis com o estado das filas.
 ## Estruturas de dados utilizadas
 | Estrutura | Onde é usada | Por quê |
 |---|---|---|
-| Lista encadeada (classe No) | Base da FilaFIFO | Permite inserir no fim e
-remover do início em tempo constante, O(1) |
-| FilaFIFO | Uma fila por categoria em cada especialidade | Garante a ordem
-de chegada (primeiro a entrar, primeiro a sair) |
-| FilaPrioridade | Uma por especialidade; agrupa a fila P e a fila N | Aplica
-a regra de prioridade entre as categorias |
-| Dicionários | Especialidades, categorias, filas por especialidade e
-contadores de numeração | Acesso direto por chave |
+| Lista encadeada (classe No) | Base da FilaFIFO | Permite inserir no fim e remover do início em tempo constante, O(1) |
+| FilaFIFO | Uma fila por categoria em cada especialidade | Garante a ordem de chegada (primeiro a entrar, primeiro a sair) |
+| FilaPrioridade | Uma por especialidade; agrupa a fila P e a fila N | Aplica a regra de prioridade entre as categorias |
+| Dicionários | Especialidades, categorias, filas por especialidade e contadores de numeração | Acesso direto por chave |
 Manual Completo — Sistema de Gerenciamento de Senhas para Clínica Médica
-| Lista | Histórico de atendimentos | Registra as senhas na ordem em que
-foram chamadas |
+| Lista | Histórico de atendimentos | Registra as senhas na ordem em que foram chamadas |
 ## Regra de prioridade adotada
 1. Cada especialidade possui duas filas FIFO independentes: Preferencial (P)
 e Normal (N).
